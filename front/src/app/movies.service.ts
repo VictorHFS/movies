@@ -16,11 +16,23 @@ export class MovieService {
     
     return this._httpClient.get<Page<Movie>>(`${this.resource}${queryParams}`);
   }
+  
   anosComMaisDeUmVencedor() : Observable<YearCount[]> {
     
     return this._httpClient.get<{years: YearCount[]}>(`${this.resource}?projection=years-with-multiple-winners`)
     .pipe(map(y => y.years));
   }
+  
+  estudiosComContadorDeVitoria() : Observable<StudioCount[]> {
+    
+    return this._httpClient.get<{studios: StudioCount[]}>(`${this.resource}?projection=studios-with-win-count`)
+    .pipe(map(y => y.studios));
+  }
+}
+
+export interface StudioCount {
+  name: string;
+  winCount: number;
 }
 
 export interface YearCount {

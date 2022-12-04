@@ -2,8 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DashboardComponent } from './dashboard.component';
 import { MultipleYearsComponent } from './../multiple-years/multiple-years.component';
-import { MockComponent, MockService } from 'ng-mocks';
+import { MockComponent, MockComponents, MockService } from 'ng-mocks';
 import { MovieService } from './../movies.service';
+import { TopStudiosComponent } from './../top-studios/top-studios.component';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -13,7 +14,7 @@ describe('DashboardComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ 
         DashboardComponent,
-        MockComponent(MultipleYearsComponent)
+        MockComponents(MultipleYearsComponent, TopStudiosComponent),
      ],
      providers: [
       {provide: MovieService, useValue: MockService(MovieService)}

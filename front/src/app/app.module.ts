@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { MultipleYearsComponent } from './multiple-years/multiple-years.component';
+import { TopStudiosComponent } from './top-studios/top-studios.component';
 
 const routes :Routes = [
   {path: '', component: DashboardComponent},
@@ -23,7 +24,8 @@ const routes :Routes = [
     AppComponent,
     DashboardComponent,
     ListComponent,
-    MultipleYearsComponent
+    MultipleYearsComponent,
+    TopStudiosComponent
   ],
   imports: [
     CommonModule,
