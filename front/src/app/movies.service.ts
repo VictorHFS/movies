@@ -31,8 +31,7 @@ export class MovieService {
   
   produtorComMaiorEMenorIntervaloDeVitorias() : Observable<MaxMinIntervalForProducers> {
     
-    return this._httpClient.get<MaxMinIntervalForProducers>(`${this.resource}?projection=max-min-win-interval-for-produc
-    ers`);
+    return this._httpClient.get<MaxMinIntervalForProducers>(`${this.resource}?projection=max-min-win-interval-for-producers`);
   }
 }
 

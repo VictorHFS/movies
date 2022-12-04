@@ -1,1 +1,39 @@
-<p>producer-min-max-interval works!</p>
+<h3 class="p-card-title px-3">Producers with longestand shortest interval between wins</h3>
+<p class="p-card-subtitle p-3 pb-0">Maximum</p>
+<p-table [value]="max">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Producer</th>
+            <th>Interval</th>
+            <th>Previous Year</th>
+            <th>Following Year</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+        <tr>
+            <td>{{data.producer}}</td>
+            <td>{{data.interval}}</td>
+            <td>{{data.previousWin}}</td>
+            <td>{{data.followingWin}}</td>
+        </tr>
+    </ng-template>
+</p-table>
+<p class="p-card-subtitle p-3 pb-0">Minimum</p>
+<p-table [value]="min">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Producer</th>
+            <th>Interval</th>
+            <th>Previous Year</th>
+            <th>Following Year</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+        <tr>
+            <td>{{data.producer}}</td>
+            <td>{{data.interval}}</td>
+            <td>{{data.previousWin}}</td>
+            <td>{{data.followingWin}}</td>
+        </tr>
+    </ng-template>
+</p-table>

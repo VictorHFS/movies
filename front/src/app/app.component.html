@@ -1,7 +1,14 @@
-
-<div class="card flex">
-  <p-menu [model]="items"></p-menu>
-  <div style="width: 100%;">
+<div class="grid flex">
+  <div class="col-6 bg-primary">
+    <h3 class="p-title pl-1 inline">Angular Application</h3>
+  </div>
+  <div class="col-6 bg-primary">
+    <h3 class="p-title inline"> Movies </h3>
+  </div>
+  <div class="col-2">
+    <p-menu [model]="items"></p-menu>
+  </div>
+  <div class="col-10">
     <router-outlet></router-outlet>
   </div>
 </div>

@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProducerMinMaxIntervalComponent } from './producer-min-max-interval.component';
 import { MaxMinIntervalForProducers, MovieService } from './../movies.service';
 import { of } from 'rxjs';
+import { TableModule } from 'primeng/table';
 
 const data: MaxMinIntervalForProducers= {"min":[
   {"producer":"Joel Silver","interval":1,"previousWin":1990,"followingWin":1991},
@@ -22,6 +23,7 @@ describe('ProducerMinMaxIntervalComponent', () => {
    movieService = jasmine.createSpyObj('movieService', ['produtorComMaiorEMenorIntervaloDeVitorias']);
    movieService.produtorComMaiorEMenorIntervaloDeVitorias.and.returnValue(of(data))
     await TestBed.configureTestingModule({
+      imports: [TableModule],
       declarations: [ ProducerMinMaxIntervalComponent ],
       providers: [{provide: MovieService, useValue: movieService}]
     })

@@ -5,6 +5,7 @@ import { MultipleYearsComponent } from './../multiple-years/multiple-years.compo
 import { MockComponent, MockComponents, MockService } from 'ng-mocks';
 import { MovieService } from './../movies.service';
 import { TopStudiosComponent } from './../top-studios/top-studios.component';
+import { ProducerMinMaxIntervalComponent } from './../producer-min-max-interval/producer-min-max-interval.component';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -14,7 +15,7 @@ describe('DashboardComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ 
         DashboardComponent,
-        MockComponents(MultipleYearsComponent, TopStudiosComponent),
+        MockComponents(MultipleYearsComponent, TopStudiosComponent, ProducerMinMaxIntervalComponent),
      ],
      providers: [
       {provide: MovieService, useValue: MockService(MovieService)}

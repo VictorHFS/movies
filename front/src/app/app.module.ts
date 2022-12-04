@@ -13,6 +13,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { MultipleYearsComponent } from './multiple-years/multiple-years.component';
 import { TopStudiosComponent } from './top-studios/top-studios.component';
 import { ProducerMinMaxIntervalComponent } from './producer-min-max-interval/producer-min-max-interval.component';
+import { MovieWinnerByYearComponent } from './movie-winner-by-year/movie-winner-by-year.component';
+import { FormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 const routes :Routes = [
   {path: '', component: DashboardComponent},
@@ -27,7 +31,8 @@ const routes :Routes = [
     ListComponent,
     MultipleYearsComponent,
     TopStudiosComponent,
-    ProducerMinMaxIntervalComponent
+    ProducerMinMaxIntervalComponent,
+    MovieWinnerByYearComponent,
   ],
   imports: [
     CommonModule,
@@ -35,8 +40,11 @@ const routes :Routes = [
     RouterModule.forRoot(routes),
     MenuModule,
     TableModule,
+    ButtonModule,
+    InputNumberModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
