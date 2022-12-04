@@ -1,0 +1,18 @@
+<p-table [value]="movies">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>ID</th>
+            <th>Year</th>
+            <th>Title</th>
+            <th>Winner</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-movie>
+        <tr>
+            <td>{{movie.id}}</td>
+            <td>{{movie.year}}</td>
+            <td>{{movie.title}}</td>
+            <td>{{movie.winner}}</td>
+        </tr>
+    </ng-template>
+</p-table>

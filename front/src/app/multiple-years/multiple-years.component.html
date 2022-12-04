@@ -1,0 +1,15 @@
+<h3>List years with multiple winners</h3>
+<p-table [value]="years">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>YEAR</th>
+            <th>Win Count</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-year>
+        <tr>
+            <td>{{year.year}}</td>
+            <td>{{year.winnerCount}}</td>
+        </tr>
+    </ng-template>
+</p-table>
