@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { MultipleYearsComponent } from './multiple-years/multiple-years.component';
 import { TopStudiosComponent } from './top-studios/top-studios.component';
+import { ProducerMinMaxIntervalComponent } from './producer-min-max-interval/producer-min-max-interval.component';
 
 const routes :Routes = [
   {path: '', component: DashboardComponent},
@@ -25,7 +26,8 @@ const routes :Routes = [
     DashboardComponent,
     ListComponent,
     MultipleYearsComponent,
-    TopStudiosComponent
+    TopStudiosComponent,
+    ProducerMinMaxIntervalComponent
   ],
   imports: [
     CommonModule,

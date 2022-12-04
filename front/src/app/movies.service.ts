@@ -28,6 +28,24 @@ export class MovieService {
     return this._httpClient.get<{studios: StudioCount[]}>(`${this.resource}?projection=studios-with-win-count`)
     .pipe(map(y => y.studios));
   }
+  
+  produtorComMaiorEMenorIntervaloDeVitorias() : Observable<MaxMinIntervalForProducers> {
+    
+    return this._httpClient.get<MaxMinIntervalForProducers>(`${this.resource}?projection=max-min-win-interval-for-produc
+    ers`);
+  }
+}
+
+export interface MaxMinIntervalForProducers {
+  min: ProducerWinInterval[]
+  max:ProducerWinInterval []
+}
+
+export interface ProducerWinInterval {
+  producer: string,
+  interval: number,
+  previousWin: number,
+  followingWin: number;
 }
 
 export interface StudioCount {
