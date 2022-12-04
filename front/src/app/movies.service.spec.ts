@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { MovieService } from './movies.service';
 import { HttpClient } from '@angular/common/http';
+import { of } from 'rxjs';
 
 describe('MoviesService', () => {
   let service: MovieService;
@@ -9,6 +10,7 @@ describe('MoviesService', () => {
 
   beforeEach(() => {
     httpClient = jasmine.createSpyObj('httpClient', ['get']);
+    httpClient.get.and.returnValue(of());
     TestBed.configureTestingModule({
       providers: [
         {provide: HttpClient, useValue: httpClient}
@@ -38,6 +40,6 @@ describe('MoviesService', () => {
 
   it('anosComMaisDeUmVencedor', () => {
     service.anosComMaisDeUmVencedor();
-    expect(httpClient.get).toHaveBeenCalledWith('https://tools.texoit.com/backend-java/api/movies?projection=year-with-multiple-winners')
+    expect(httpClient.get).toHaveBeenCalledWith('https://tools.texoit.com/backend-java/api/movies?projection=years-with-multiple-winners')
   });
 });
