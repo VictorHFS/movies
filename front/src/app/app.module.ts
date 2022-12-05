@@ -17,6 +17,7 @@ import { MovieWinnerByYearComponent } from './movie-winner-by-year/movie-winner-
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { PaginatorModule } from 'primeng/paginator';
 
 const routes :Routes = [
   {path: '', component: DashboardComponent},
@@ -25,15 +26,6 @@ const routes :Routes = [
 ]
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DashboardComponent,
-    ListComponent,
-    MultipleYearsComponent,
-    TopStudiosComponent,
-    ProducerMinMaxIntervalComponent,
-    MovieWinnerByYearComponent,
-  ],
   imports: [
     CommonModule,
     BrowserModule,
@@ -44,7 +36,17 @@ const routes :Routes = [
     InputNumberModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    PaginatorModule,
+  ],
+  declarations: [
+    AppComponent,
+    DashboardComponent,
+    ListComponent,
+    MultipleYearsComponent,
+    TopStudiosComponent,
+    ProducerMinMaxIntervalComponent,
+    MovieWinnerByYearComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

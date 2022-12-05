@@ -13,24 +13,24 @@ export class MovieService {
     let queryParams = `?page=${page}&size=${size}`;
     queryParams += typeof winner === 'boolean' ? `&winner=${winner}` : '';
     queryParams += year ? `&year=${year}` : '';
-    
+
     return this._httpClient.get<Page<Movie>>(`${this.resource}${queryParams}`);
   }
-  
+
   anosComMaisDeUmVencedor() : Observable<YearCount[]> {
-    
+
     return this._httpClient.get<{years: YearCount[]}>(`${this.resource}?projection=years-with-multiple-winners`)
     .pipe(map(y => y.years));
   }
-  
+
   estudiosComContadorDeVitoria() : Observable<StudioCount[]> {
-    
+
     return this._httpClient.get<{studios: StudioCount[]}>(`${this.resource}?projection=studios-with-win-count`)
     .pipe(map(y => y.studios));
   }
-  
+
   produtorComMaiorEMenorIntervaloDeVitorias() : Observable<MaxMinIntervalForProducers> {
-    
+
     return this._httpClient.get<MaxMinIntervalForProducers>(`${this.resource}?projection=max-min-win-interval-for-producers`);
   }
 }
@@ -71,12 +71,12 @@ export interface Page<T> {
 }
 
 export interface Pageable {
-  sort: Sort,
+  sort?: Sort,
   pageSize: number,
   pageNumber: number,
-  offset: number,
-  paged: boolean,
-  unpaged: false,
+  offset?: number,
+  paged?: boolean,
+  unpaged?: boolean,
 }
 
 export interface Sort{
