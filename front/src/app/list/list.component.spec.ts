@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { PaginatorModule } from 'primeng/paginator';
 import { TableModule } from 'primeng/table';
 import { of } from 'rxjs';
 import { Movie, MovieService, Page, Pageable } from '../movies.service';
@@ -42,9 +43,12 @@ describe('ListComponent', () => {
   beforeEach(async () => {
     const movieService: jasmine.SpyObj<MovieService> = jasmine.createSpyObj('movieService', ['dadosDosFilmes']);
     movieService.dadosDosFilmes.and.returnValue(of(PAGE))
-    
+
     await TestBed.configureTestingModule({
-      imports: [TableModule],
+      imports: [
+        TableModule,
+        PaginatorModule
+      ],
       declarations: [ ListComponent ],
       providers: [
         {provide: MovieService, useValue: movieService}

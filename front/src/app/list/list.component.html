@@ -1,25 +1,40 @@
 <div class="grid flex">
-    <div class="col-12 pl-0">
-        <div class="p-card surface-border">
-            <p-table [value]="movies">
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th>ID</th>
-                        <th>Year</th>
-                        <th>Title</th>
-                        <th>Winner</th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-movie>
-                    <tr>
-                        <td>{{movie.id}}</td>
-                        <td>{{movie.year}}</td>
-                        <td>{{movie.title}}</td>
-                        <td>{{movie.winner}}</td>
-                    </tr>
-                </ng-template>
-            </p-table>
-            <p-paginator [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[10,20,30]" (onPageChange)="pageChange($event)"></p-paginator>
-        </div>
+  <div class="col-12 pl-0">
+    <div class="p-card surface-border">
+      <p-table [value]="movies">
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="text-center col-2">ID</th>
+            <th class="text-center col-2">
+              <div class="block">Year</div>
+              <div class="block">
+                <p-inputNumber (onInput)="dataChange($event)"></p-inputNumber>
+              </div>
+            </th>
+            <th class="text-center col-6">Title</th>
+            <th class="text-center col-2">
+              <div>Winner</div>
+              <div>
+                <select title="Winner" [(ngModel)]="winner"
+                (change)="dataChange()" class="p-inputtext p-component p-element p-inputnumber-input w-full text-center">
+                <option [value]="''" class="p-cascadeselect-items">Yes/No</option>
+                <option class="p-cascadeselect-items" *ngFor="let item of winnerOptions" [value]="item">{{item}}</option>
+              </select>
+              </div>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-movie>
+          <tr>
+            <td>{{movie.id}}</td>
+            <td>{{movie.year}}</td>
+            <td>{{movie.title}}</td>
+            <td>{{movie.winner ? 'Yes' : 'No'}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <p-paginator [rows]="pageable.pageSize" [totalRecords]="totalRecords"
+        [rowsPerPageOptions]="[10,20,30]" (onPageChange)="pageChange($event)"></p-paginator>
     </div>
+  </div>
 </div>
