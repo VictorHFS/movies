@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.DemoApplication;
+import com.example.demo.MovieApplication;
 import com.example.demo.domain.Movie;
 import com.example.demo.repository.MovieRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.UUID;
@@ -34,7 +35,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.MOCK,
-        classes = DemoApplication.class)
+        classes = MovieApplication.class)
 @AutoConfigureMockMvc
 public class MovieControllerTest {
 
@@ -113,8 +114,8 @@ public class MovieControllerTest {
                     Movie m = byId.get();
                     assertEquals(2020, m.getYear());
                     assertEquals("test title", m.getTitle());
-                    assertEquals("test studio", m.getStudios().get(0).getName());
-                    assertEquals("test producer", m.getProducers().get(0).getName());
+                    assertEquals("test studio", new ArrayList<>(m.getStudios()).get(0).getName());
+                    assertEquals("test producer", new ArrayList<>(m.getProducers()).get(0).getName());
                     assertEquals(true, m.getWinner());
                 })
                 .andDo(MockMvcResultHandlers.print());

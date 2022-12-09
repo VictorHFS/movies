@@ -12,11 +12,11 @@ import java.util.stream.Stream;
 public final class MovieFactory {
 
     private static List<String> toStudios(String value) {
-        return Optional.ofNullable(value).map(_value -> Arrays.asList(_value.split(";"))).orElse(new ArrayList<>());
+        return Optional.ofNullable(value).map(_value -> Arrays.asList(_value.split(",|( and )"))).orElse(new ArrayList<>());
     }
 
     private static List<String> toProducers(String value) {
-        return Optional.ofNullable(value).map(_value -> Arrays.asList(_value.split(";"))).orElse(new ArrayList<>());
+        return Optional.ofNullable(value).map(_value -> Arrays.asList(_value.split(",|( and )"))).orElse(new ArrayList<>());
     }
 
     private static Boolean toWinner(String value) {

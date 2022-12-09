@@ -3,6 +3,7 @@ package com.example.demo.domain;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
@@ -20,6 +21,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(of = "name")
+@EqualsAndHashCode(of = "name")
 public class Studio {
 
     @Id
@@ -34,6 +36,6 @@ public class Studio {
     private List<Movie> movie;
 
     public Studio(String name) {
-        this.name = name;
+        this.name = name.trim();
     }
 }
