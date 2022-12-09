@@ -1,21 +1,20 @@
 package com.example.demo.initialization;
 
-import com.example.demo.domain.Movie;
 import com.example.demo.repository.MovieRepository;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class DataBaseInitializationTest {
 
+    @Autowired
     private MovieRepository movieRepository;
 
     @Test
     public void test() {
-        assertEquals(0, movieRepository.count());
+        assertEquals(206, movieRepository.count());
     }
 }
