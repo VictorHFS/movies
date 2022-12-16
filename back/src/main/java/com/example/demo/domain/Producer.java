@@ -10,6 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -32,7 +33,7 @@ public class Producer {
     private String name;
 
     @JsonBackReference
-    @ManyToMany(mappedBy = "producers")
+    @ManyToMany(mappedBy = "producers", fetch = FetchType.EAGER)
     private List<Movie> movie;
 
     public Producer(String name) {

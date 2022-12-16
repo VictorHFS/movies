@@ -4,6 +4,8 @@ import com.example.demo.domain.Intervalo;
 import com.example.demo.domain.Movie;
 import com.example.demo.domain.Producer;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
