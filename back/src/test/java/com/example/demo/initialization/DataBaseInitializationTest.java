@@ -23,8 +23,8 @@ public class DataBaseInitializationTest {
 
     @Test
     public void test() {
-        assertEquals(206, movieRepository.count());
+        assertEquals(207, movieRepository.count());
         assertEquals(360, producerRepository.count());
-        assertEquals(59, studioRepository.count());
+        assertEquals(60, studioRepository.count());
     }
 }
