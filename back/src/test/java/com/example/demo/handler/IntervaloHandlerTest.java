@@ -1,6 +1,7 @@
 package com.example.demo.handler;
 
 import com.example.demo.domain.Intervalo;
+import com.example.demo.domain.IntervaloDePremios;
 import com.example.demo.domain.Movie;
 import com.example.demo.domain.Producer;
 import org.junit.jupiter.api.BeforeAll;
@@ -23,56 +24,65 @@ class IntervaloHandlerTest {
     }
 
     @Test
-    void getMenorIntervalor() {
+    void findIntervaloDePremios() {
 
-        ArrayList<Intervalo> menorIntervalor = handler.getMenorIntervalor(
-                Arrays.asList(intervalo(0), intervalo(1)),
-                Arrays.asList(intervalo(0), intervalo(2))
+        IntervaloDePremios intervalo = handler.findIntervaloDePremios(
+                createIntervalo(intervalo(1), intervalo(1)),
+                createIntervalo(intervalo(2), intervalo(2))
         );
-        assertEquals(1, menorIntervalor.size());
-        assertEquals(1, menorIntervalor.get(0).getIntervalo());
 
-        menorIntervalor = handler.getMenorIntervalor(
-                Arrays.asList(intervalo(0), intervalo(1)),
-                Arrays.asList(intervalo(0), intervalo(1))
-        );
-        assertEquals(2, menorIntervalor.size());
-        assertEquals(1, menorIntervalor.get(0).getIntervalo());
-        assertEquals(1, menorIntervalor.get(1).getIntervalo());
+        assertEquals(1, intervalo.getMin().size());
+        assertEquals(1, intervalo.getMin().get(0).getIntervalo());
 
-        menorIntervalor = handler.getMenorIntervalor(
-                Arrays.asList(intervalo(0), intervalo(2)),
-                Arrays.asList(intervalo(0), intervalo(1))
+        assertEquals(1, intervalo.getMax().size());
+        assertEquals(2, intervalo.getMax().get(0).getIntervalo());
+
+        intervalo = handler.findIntervaloDePremios(
+                createIntervalo(intervalo(2), intervalo(1)),
+                createIntervalo(intervalo(2), intervalo(1))
         );
-        assertEquals(1, menorIntervalor.size());
-        assertEquals(1, menorIntervalor.get(0).getIntervalo());
+        assertEquals(2, intervalo.getMin().size());
+        assertEquals(1, intervalo.getMin().get(0).getIntervalo());
+        assertEquals(1, intervalo.getMin().get(1).getIntervalo());
+
+        assertEquals(2, intervalo.getMax().size());
+        assertEquals(2, intervalo.getMax().get(0).getIntervalo());
+        assertEquals(2, intervalo.getMax().get(1).getIntervalo());
+
+        intervalo = handler.findIntervaloDePremios(
+                createIntervalo(intervalo(2), intervalo(2)),
+                createIntervalo(intervalo(1), intervalo(1))
+        );
+        assertEquals(1, intervalo.getMin().size());
+        assertEquals(1, intervalo.getMin().get(0).getIntervalo());
+
+        assertEquals(1, intervalo.getMax().size());
+        assertEquals(2, intervalo.getMax().get(0).getIntervalo());
+
+        intervalo = handler.findIntervaloDePremios(
+                createIntervalo(intervalo(2, 2), intervalo(2)),
+                createIntervalo(intervalo(1), intervalo(1, 1))
+        );
+        assertEquals(2, intervalo.getMin().size());
+        assertEquals(1, intervalo.getMin().get(0).getIntervalo());
+        assertEquals(1, intervalo.getMin().get(1).getIntervalo());
+
+        assertEquals(2, intervalo.getMax().size());
+        assertEquals(2, intervalo.getMax().get(0).getIntervalo());
+        assertEquals(2, intervalo.getMax().get(1).getIntervalo());
 
     }
 
-    @Test
-    void getMaiorIntervalor() {
-        ArrayList<Intervalo> maiorIntervalor = handler.getMaiorIntervalor(
-                Arrays.asList(intervalo(1)),
-                Arrays.asList(intervalo(2))
-        );
-        assertEquals(1, maiorIntervalor.size());
-        assertEquals(2, maiorIntervalor.get(0).getIntervalo());
+    private IntervaloDePremios createIntervalo(Intervalo maior, Intervalo menor) {
+        return new IntervaloDePremios(List.of(menor), List.of(maior));
+    }
 
-        maiorIntervalor = handler.getMaiorIntervalor(
-                Arrays.asList(intervalo(2)),
-                Arrays.asList(intervalo(2))
-        );
-        assertEquals(2, maiorIntervalor.size());
-        assertEquals(2, maiorIntervalor.get(0).getIntervalo());
-        assertEquals(2, maiorIntervalor.get(1).getIntervalo());
+    private IntervaloDePremios createIntervalo(Intervalo maior, List<Intervalo> menor) {
+        return new IntervaloDePremios(menor, List.of(maior));
+    }
 
-        maiorIntervalor = handler.getMaiorIntervalor(
-                Arrays.asList(intervalo(2)),
-                Arrays.asList(intervalo(1))
-        );
-        assertEquals(1, maiorIntervalor.size());
-        assertEquals(2, maiorIntervalor.get(0).getIntervalo());
-
+    private IntervaloDePremios createIntervalo(List<Intervalo> maior, Intervalo menor) {
+        return new IntervaloDePremios(List.of(menor), maior);
     }
 
     private Intervalo intervalo(int i) {
@@ -81,27 +91,37 @@ class IntervaloHandlerTest {
         return intervalo;
     }
 
+    private List<Intervalo> intervalo(int i, int j) {
+        return List.of(
+                intervalo(i),
+                intervalo(j)
+        );
+    }
+
     @Test
     void findMaiorEMenorIntervalo() {
-        List<Intervalo> intervalos = handler.findMaiorEMenorIntervalo(producerUm());
-        Intervalo maior = intervalos.get(0);
+        IntervaloDePremios intervalos = handler.findMaiorEMenorIntervalo(producerUm())
+                .orElseThrow(IllegalArgumentException::new);
+        Intervalo maior = intervalos.getMax().get(0);
         assertEquals(5, maior.getIntervalo());
 
-        Intervalo menor = intervalos.get(1);
+        Intervalo menor = intervalos.getMin().get(0);
         assertEquals(3, menor.getIntervalo());
 
-        intervalos = handler.findMaiorEMenorIntervalo(producerDois());
-        maior = intervalos.get(0);
+        intervalos = handler.findMaiorEMenorIntervalo(producerDois())
+                .orElseThrow(IllegalArgumentException::new);
+        maior = intervalos.getMax().get(0);
         assertEquals(10, maior.getIntervalo());
 
-        menor = intervalos.get(1);
+        menor = intervalos.getMin().get(0);
         assertEquals(5, menor.getIntervalo());
 
-        intervalos = handler.findMaiorEMenorIntervalo(producerTres());
-        maior = intervalos.get(0);
+        intervalos = handler.findMaiorEMenorIntervalo(producerTres())
+                .orElseThrow(IllegalArgumentException::new);
+        maior = intervalos.getMax().get(0);
         assertEquals(7, maior.getIntervalo());
 
-        menor = intervalos.get(1);
+        menor = intervalos.getMin().get(0);
         assertEquals(2, menor.getIntervalo());
     }
 

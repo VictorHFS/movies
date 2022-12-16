@@ -60,7 +60,7 @@ public class IntervaloHandler {
             previous = current;
         }
 
-        return Optional.of(new IntervaloDePremios(maior, menor));
+        return Optional.of(new IntervaloDePremios(menor, maior));
     }
 
     private boolean isMenor(List<Intervalo> menor, int intervalo) {
@@ -73,7 +73,7 @@ public class IntervaloHandler {
     private boolean isMaior(List<Intervalo> maior, int intervalo) {
         return maior.stream()
                 .findAny()
-                .map(m -> intervalo < m.getIntervalo())
+                .map(m -> intervalo > m.getIntervalo())
                 .orElse(true);
     }
 
