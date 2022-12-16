@@ -36,11 +36,15 @@ public class ProducerControllerTest {
             .andExpect(MockMvcResultMatchers.jsonPath("min[0].intervalo", equalTo(1)))
             .andExpect(MockMvcResultMatchers.jsonPath("min[0].previousWin", equalTo(1990)))
             .andExpect(MockMvcResultMatchers.jsonPath("min[0].followingWin", equalTo(1991)))
-            .andExpect(MockMvcResultMatchers.jsonPath("max", hasSize(1)))
+            .andExpect(MockMvcResultMatchers.jsonPath("max", hasSize(2)))
             .andExpect(MockMvcResultMatchers.jsonPath("max[0].producer.name", equalTo("Matthew Vaughn")))
             .andExpect(MockMvcResultMatchers.jsonPath("max[0].intervalo", equalTo(13)))
             .andExpect(MockMvcResultMatchers.jsonPath("max[0].previousWin", equalTo(2002)))
             .andExpect(MockMvcResultMatchers.jsonPath("max[0].followingWin", equalTo(2015)))
+            .andExpect(MockMvcResultMatchers.jsonPath("max[1].producer.name", equalTo("Matthew Vaughn")))
+            .andExpect(MockMvcResultMatchers.jsonPath("max[1].intervalo", equalTo(13)))
+            .andExpect(MockMvcResultMatchers.jsonPath("max[1].previousWin", equalTo(2015)))
+            .andExpect(MockMvcResultMatchers.jsonPath("max[1].followingWin", equalTo(2028)))
             .andDo(MockMvcResultHandlers.print());
     }
 }
