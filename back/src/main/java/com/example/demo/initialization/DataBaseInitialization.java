@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -105,13 +104,9 @@ public class DataBaseInitialization {
                 return reader.lines()
                         .parallel()
                         .map(line -> {
-                            if (!header.equals(line)) {
                                 String[] fields = line.split(";");
-                                return Optional.of(MovieFactory.create(fields));
-                            }
-                            return Optional.empty();
-                        }).filter(Optional::isPresent)
-                        .map(o -> (Movie) o.get())
+                                return MovieFactory.create(fields);
+                        })
                         .collect(Collectors.toList());
             }
         } catch (IOException e) {

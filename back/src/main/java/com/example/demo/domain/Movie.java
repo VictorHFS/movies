@@ -24,8 +24,8 @@ import java.util.stream.Collectors;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(of = "title")
-@EqualsAndHashCode(of = "title")
+@ToString(of = {"year", "title"})
+@EqualsAndHashCode(of = {"year", "title"})
 public class Movie {
 
     @Id
