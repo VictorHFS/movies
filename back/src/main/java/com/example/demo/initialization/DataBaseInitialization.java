@@ -44,6 +44,7 @@ public class DataBaseInitialization {
     @Transactional
     private void initializeData() {
         List<Movie> movies = readCsv();
+        removeBlankRecords(movies);
 
         Set<Producer> allProducers = movies.parallelStream()
                 .map(Movie::getProducers)
@@ -94,6 +95,21 @@ public class DataBaseInitialization {
         }
 
         movieRepository.saveAll(movies);
+    }
+
+    private void removeBlankRecords(List<Movie> movies) {
+        movies.parallelStream().forEach(movie -> {
+            Set<Producer> producersNotBlank = movie.getProducers()
+                    .parallelStream()
+                    .filter(p -> !p.getName().isBlank())
+                    .collect(Collectors.toSet());
+            movie.setProducers(producersNotBlank);
+            Set<Studio> studiosNotBlank = movie.getStudios()
+                    .parallelStream()
+                    .filter(p -> !p.getName().isBlank())
+                    .collect(Collectors.toSet());
+            movie.setStudios(studiosNotBlank);
+        });
     }
 
     private List<Movie> readCsv() {
